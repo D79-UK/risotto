@@ -1,0 +1,343 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище cafedatabaseModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="assortiments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="127" />
+          <Property Name="price" Type="float" />
+        </EntityType>
+        <EntityType Name="available_assortiments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_assortiment" Type="int" />
+          <Property Name="id_cafe" Type="int" />
+          <Property Name="quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="cafes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="61" Nullable="false" />
+          <Property Name="address" Type="nvarchar" MaxLength="61" Nullable="false" />
+          <Property Name="lat" Type="float" />
+          <Property Name="lon" Type="float" />
+        </EntityType>
+        <EntityType Name="cevents">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="61" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="1023" Nullable="false" />
+          <Property Name="scheduled_on" Type="datetime" />
+        </EntityType>
+        <EntityType Name="comments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_post" Type="int" />
+          <Property Name="title" Type="nvarchar" MaxLength="61" Nullable="false" />
+          <Property Name="body" Type="nvarchar" MaxLength="1023" Nullable="false" />
+          <Property Name="commented_at" Type="datetime" />
+        </EntityType>
+        <EntityType Name="posts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="61" Nullable="false" />
+          <Property Name="body" Type="nvarchar" MaxLength="1023" Nullable="false" />
+          <Property Name="posted_at" Type="datetime" />
+        </EntityType>
+        <Association Name="fk_available_assortiments">
+          <End Role="assortiments" Type="Self.assortiments" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="available_assortiments" Type="Self.available_assortiments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="assortiments">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="available_assortiments">
+              <PropertyRef Name="id_assortiment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_cafe">
+          <End Role="cafes" Type="Self.cafes" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="available_assortiments" Type="Self.available_assortiments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cafes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="available_assortiments">
+              <PropertyRef Name="id_cafe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_posts">
+          <End Role="posts" Type="Self.posts" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="comments" Type="Self.comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="posts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="comments">
+              <PropertyRef Name="id_post" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище cafedatabaseModelContainer">
+          <EntitySet Name="assortiments" EntityType="Self.assortiments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="available_assortiments" EntityType="Self.available_assortiments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cafes" EntityType="Self.cafes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cevents" EntityType="Self.cevents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="comments" EntityType="Self.comments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="posts" EntityType="Self.posts" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_available_assortiments" Association="Self.fk_available_assortiments">
+            <End Role="assortiments" EntitySet="assortiments" />
+            <End Role="available_assortiments" EntitySet="available_assortiments" />
+          </AssociationSet>
+          <AssociationSet Name="fk_cafe" Association="Self.fk_cafe">
+            <End Role="cafes" EntitySet="cafes" />
+            <End Role="available_assortiments" EntitySet="available_assortiments" />
+          </AssociationSet>
+          <AssociationSet Name="fk_posts" Association="Self.fk_posts">
+            <End Role="posts" EntitySet="posts" />
+            <End Role="comments" EntitySet="comments" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="cafedatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="assortiments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="127" FixedLength="false" Unicode="true" />
+          <Property Name="price" Type="Double" />
+          <NavigationProperty Name="available_assortiments" Relationship="Self.fk_available_assortiments" FromRole="assortiments" ToRole="available_assortiments" />
+        </EntityType>
+        <EntityType Name="available_assortiments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_assortiment" Type="Int32" />
+          <Property Name="id_cafe" Type="Int32" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="assortiments" Relationship="Self.fk_available_assortiments" FromRole="available_assortiments" ToRole="assortiments" />
+          <NavigationProperty Name="cafes" Relationship="Self.fk_cafe" FromRole="available_assortiments" ToRole="cafes" />
+        </EntityType>
+        <EntityType Name="cafes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="61" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="61" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="lat" Type="Double" />
+          <Property Name="lon" Type="Double" />
+          <NavigationProperty Name="available_assortiments" Relationship="Self.fk_cafe" FromRole="cafes" ToRole="available_assortiments" />
+        </EntityType>
+        <EntityType Name="cevents">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="61" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="1023" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="scheduled_on" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="comments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_post" Type="Int32" />
+          <Property Name="title" Type="String" MaxLength="61" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="body" Type="String" MaxLength="1023" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="commented_at" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="posts" Relationship="Self.fk_posts" FromRole="comments" ToRole="posts" />
+        </EntityType>
+        <EntityType Name="posts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="61" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="body" Type="String" MaxLength="1023" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="posted_at" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="comments" Relationship="Self.fk_posts" FromRole="posts" ToRole="comments" />
+        </EntityType>
+        <Association Name="fk_available_assortiments">
+          <End Role="assortiments" Type="Self.assortiments" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="available_assortiments" Type="Self.available_assortiments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="assortiments">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="available_assortiments">
+              <PropertyRef Name="id_assortiment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_cafe">
+          <End Role="cafes" Type="Self.cafes" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="available_assortiments" Type="Self.available_assortiments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cafes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="available_assortiments">
+              <PropertyRef Name="id_cafe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_posts">
+          <End Role="posts" Type="Self.posts" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="comments" Type="Self.comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="posts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="comments">
+              <PropertyRef Name="id_post" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="cafedatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="assortiments" EntityType="Self.assortiments" />
+          <EntitySet Name="available_assortiments" EntityType="Self.available_assortiments" />
+          <EntitySet Name="cafes" EntityType="Self.cafes" />
+          <EntitySet Name="cevents" EntityType="Self.cevents" />
+          <EntitySet Name="comments" EntityType="Self.comments" />
+          <EntitySet Name="posts" EntityType="Self.posts" />
+          <AssociationSet Name="fk_available_assortiments" Association="Self.fk_available_assortiments">
+            <End Role="assortiments" EntitySet="assortiments" />
+            <End Role="available_assortiments" EntitySet="available_assortiments" />
+          </AssociationSet>
+          <AssociationSet Name="fk_cafe" Association="Self.fk_cafe">
+            <End Role="cafes" EntitySet="cafes" />
+            <End Role="available_assortiments" EntitySet="available_assortiments" />
+          </AssociationSet>
+          <AssociationSet Name="fk_posts" Association="Self.fk_posts">
+            <End Role="posts" EntitySet="posts" />
+            <End Role="comments" EntitySet="comments" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище cafedatabaseModelContainer" CdmEntityContainer="cafedatabaseEntities">
+          <EntitySetMapping Name="assortiments">
+            <EntityTypeMapping TypeName="cafedatabaseModel.assortiments">
+              <MappingFragment StoreEntitySet="assortiments">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="price" ColumnName="price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="available_assortiments">
+            <EntityTypeMapping TypeName="cafedatabaseModel.available_assortiments">
+              <MappingFragment StoreEntitySet="available_assortiments">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_assortiment" ColumnName="id_assortiment" />
+                <ScalarProperty Name="id_cafe" ColumnName="id_cafe" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cafes">
+            <EntityTypeMapping TypeName="cafedatabaseModel.cafes">
+              <MappingFragment StoreEntitySet="cafes">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="lat" ColumnName="lat" />
+                <ScalarProperty Name="lon" ColumnName="lon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cevents">
+            <EntityTypeMapping TypeName="cafedatabaseModel.cevents">
+              <MappingFragment StoreEntitySet="cevents">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="scheduled_on" ColumnName="scheduled_on" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="comments">
+            <EntityTypeMapping TypeName="cafedatabaseModel.comments">
+              <MappingFragment StoreEntitySet="comments">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_post" ColumnName="id_post" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="body" ColumnName="body" />
+                <ScalarProperty Name="commented_at" ColumnName="commented_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="posts">
+            <EntityTypeMapping TypeName="cafedatabaseModel.posts">
+              <MappingFragment StoreEntitySet="posts">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="body" ColumnName="body" />
+                <ScalarProperty Name="posted_at" ColumnName="posted_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,109 @@
+﻿@{
+    ViewBag.Title = "About Us";
+    //ViewBag.Message = "The Risotto Restaurant";
+}
+
+<div class="banner-area">
+
+    <!-- Backgound Image -->
+    <div class="bg-image bg-parallax overlay" style="background-image:url(@Url.Content("~/Content/Images/background01.jpg"))"></div>
+    <!-- /Backgound Image -->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h2 class="white-text title">About Us</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- About -->
+<div id="about" class="section">
+
+    <!-- container -->
+    <div class="container">
+
+        <!-- row -->
+        <div class="row">
+
+            <!-- section header -->
+            <div class="section-header text-center">
+                <h4 class="sub-title">@ViewBag.Title</h4>
+                <h2 class="title">@ViewBag.Message</h2>
+            </div>
+            <!-- /section header -->
+            <!-- about content -->
+            <div class="col-md-5">
+                <h4 class="lead">Welcome to Risotto Restaurant. Since 1988, Offering Traditional Dishes of the highest quality.</h4>
+            </div>
+            <!-- /about content -->
+            <!-- about content -->
+            <div class="col-md-7">
+                <p>Te sit stet labitur veritus, sea similique consetetur ut. Ne fastidii oportere usu. Iusto mediocrem iudicabit ea eos, nemore offendit detraxit ei cum. Oblique conclusionemque qui cu, eum no sonet putant. Eos cu nulla vidisse. Mazim oporteat eam ex, his ei audiam audire, affert corrumpit pri cu.</p>
+            </div>
+            <!-- /about content -->
+            <!-- Galery Slider -->
+            <div class="col-md-12">
+                <div id="galery" class="owl-carousel owl-theme">
+
+                    <!-- single column -->
+                    <div class="galery-item">
+
+                        <!-- single image -->
+                        <div class="galery-img" style="background-image:url(@Url.Content("~/Content/Images/image01.jpg"))"></div>
+                        <!-- /single image -->
+
+                    </div>
+                    <!-- single column -->
+                    <!-- single column -->
+                    <div class="galery-item">
+
+                        <!-- single image -->
+                        <div class="galery-img" style="background-image:url(@Url.Content("~/Content/Images/image02.jpg"))"></div>
+                        <!-- /single image -->
+                        <!-- single image -->
+                        <div class="galery-img" style="background-image:url(@Url.Content("~/Content/Images/image03.jpg"))"></div>
+                        <!-- /single image -->
+
+                    </div>
+                    <!-- single column -->
+                    <!-- single column -->
+                    <div class="galery-item">
+
+                        <div class="item-column">
+                            <!-- single image -->
+                            <div class="galery-img" style="background-image:url(@Url.Content("~/Content/Images/image04.jpg"))"></div>
+                            <!-- /single image -->
+                            <!-- single image -->
+                            <div class="galery-img" style="background-image:url(@Url.Content("~/Content/Images/image05.jpg"))"></div>
+                            <!-- /single image -->
+                        </div>
+
+                        <div class="item-column">
+                            <!-- single image -->
+                            <div class="galery-img" style="background-image:url(@Url.Content("~/Content/Images/image06.jpg"))"></div>
+                            <!-- /single image -->
+                            <!-- single image -->
+                            <div class="galery-img" style="background-image:url(@Url.Content("~/Content/Images/image07.jpg"))"></div>
+                            <!-- /single image -->
+                        </div>
+
+                    </div>
+                    <!-- /single column -->
+
+                </div>
+            </div>
+            <!-- /Galery Slider -->
+
+
+        </div>
+        <!-- /row -->
+
+    </div>
+    <!-- /container -->
+
+</div>
+<!-- /About -->
+
+

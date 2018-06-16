@@ -1,0 +1,52 @@
+﻿@model cafedatabase.asp.net.Models.cevents
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="banner-area">
+    <!-- Backgound Image -->
+    <div class="bg-image bg-parallax overlay" style="background-image:url(@Url.Content("~/Content/Images/background01.jpg"))"></div>
+    <!-- /Backgound Image -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h2 class="white-text title">Event Details</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.scheduled_on)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.scheduled_on)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

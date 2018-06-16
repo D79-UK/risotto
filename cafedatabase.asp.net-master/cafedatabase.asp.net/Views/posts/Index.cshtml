@@ -1,0 +1,182 @@
+﻿@model IEnumerable<cafedatabase.asp.net.Models.posts>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="banner-area">
+    <!-- Backgound Image -->
+    <div class="bg-image bg-parallax overlay" style="background-image:url(@Url.Content("~/Content/Images/background01.jpg"))"></div>
+    <!-- /Backgound Image -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h2 class="white-text title">Blog Post</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Blog -->
+<div id="blog" class="section">
+    <!-- container -->
+    <div class="container">
+
+
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+
+        @foreach (var item in Model)
+        {
+        <!-- row -->
+        <div class="row">
+            <!-- blog post -->
+            <div class="col-md-8 col-md-offset-2">
+                <!-- blog post img -->
+                <div class="blog-img">
+                    <img src="@Url.Content("~/Content/Images/blog-post.jpg")" alt="">
+                    <div class="blog-day">
+                        <span>@Html.DisplayFor(modelItem => item.posted_at)</span>
+                    </div>
+                    <ul class="blog-meta">
+                        <li><i class="fa fa-user"></i>John Doe</li>
+                        <li><i class="fa fa-pencil"></i>Category</li>
+                        <li><i class="fa fa-comments"></i>3</li>
+                    </ul>
+                </div>
+                <!-- /blog post img -->
+                <!-- blog post content -->
+                <div class="blog-content">
+                    <h4>
+                        @Html.DisplayFor(modelItem => item.title)
+                     </h4>
+                        @Html.DisplayFor(modelItem => item.body)
+                </div>
+                <!-- /blog post content -->
+                <!-- blog post tags -->
+                <div class="blog-tags">
+                    <a href="#">tasty</a>
+                    <a href="#">food</a>
+                    <a href="#">pizza</a>
+                    <a href="#">dinner</a>
+                    <a href="#">spon</a>
+                </div>
+                <!-- /blog post tags -->
+                <!-- blog post share -->
+                <div class="blog-share">
+                    <h4>Share Article:</h4>
+                    <a href="#" class="twitter"><i class="fa fa-twitter"></i>Twitter</a>
+                    <a href="#" class="facebook"><i class="fa fa-facebook"></i>Facebook</a>
+                    <a href="#" class="google"><i class="fa fa-google"></i>Google+</a>
+                    <h4>Manage this post</h4>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                </div>
+                <!-- /blog post share -->
+                <!-- blog post nav -->
+                <div class="blog-nav">
+                    <div class="row">
+                        <!-- previous post -->
+                        <div class="col-md-6">
+                            <div class="blog-previous">
+                                <a href="#">
+                                    <img src="@Url.Content("~/Content/Images/blog01.jpg")" alt="">
+                                    <div>
+                                        <span>Previous Post</span>
+                                        <h4>te vero tritani iuvaret vis. Nec odio periculis adipiscing an.</h4>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- /previous nav -->
+                        <!-- next nav -->
+                        <div class="col-md-6">
+                            <div class="blog-next">
+                                <a href="#">
+                                    <div>
+                                        <span>Next Post</span>
+                                        <h4>te vero tritani iuvaret vis. Nec odio periculis adipiscing an.</h4>
+                                    </div>
+                                    <img src="./img/blog02.jpg" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <!-- /next nav -->
+                    </div>
+                </div>
+                <!-- /blog post nav -->
+                <!-- blog post comments -->
+                <div class="blog-comments">
+                    <h3 class="title">Comments</h3>
+                    <!-- comment -->
+                    <div class="media">
+                        <div class="media-left">
+                            <img src="@Url.Content("~/Content/Images/avatar.png")" alt="">
+                        </div>
+                        <div class="media-body">
+                            <div class="media-heading">
+                                <h4>John Doe <small>2 min ago</small><small><a href="#" class="pull-right"><i class="fa fa-reply"></i></a></small></h4>
+                            </div>
+                            <p>Eu usu aliquip vivendo. Impedit suscipit invidunt te vel, sale periculis id mea. Ne nec atqui paulo,</p>
+                        </div>
+                        <!-- comment -->
+                        <div class="media">
+                            <div class="media-left">
+                                <img src="@Url.Content("~/Content/Images/avatar.png")" alt="">
+                            </div>
+                            <div class="media-body">
+                                <div class="media-heading">
+                                    <h4>John Doe <small>2 min ago</small><small><a href="#" class="pull-right"><i class="fa fa-reply"></i></a></small></h4>
+                                </div>
+                                <p>Eu usu aliquip vivendo. Impedit suscipit invidunt te vel, sale periculis id mea. Ne nec atqui paulo,</p>
+                            </div>
+                        </div>
+                        <!-- /comment -->
+                    </div>
+                    <!-- /comment -->
+                    <!-- comment -->
+                    <div class="media">
+                        <div class="media-left">
+                            <img src="@Url.Content("~/Content/Images/avatar.png")" alt="">
+                        </div>
+                        <div class="media-body">
+                            <div class="media-heading">
+                                <h4>John Doe <small>2 min ago</small><small><a href="#" class="pull-right"><i class="fa fa-reply"></i></a></small></h4>
+                            </div>
+                            <p>Eu usu aliquip vivendo. Impedit suscipit invidunt te vel, sale periculis id mea. Ne nec atqui paulo,</p>
+                        </div>
+                    </div>
+                    <!-- /comment -->
+                </div>
+                <!-- /blog post comments -->
+                <!-- blog post reply -->
+                <div class="blog-reply-form">
+                    <h3 class="title">Leave a Reply</h3>
+                    <form>
+                        <input class="input" placeholder="Name" type="text">
+                        <input class="input" placeholder="Email" type="email">
+                        <textarea class="input" placeholder="Message"></textarea>
+                    </form>
+                </div>
+                <!-- /blog post reply -->
+            </div>
+            <!-- /blog post -->
+        </div>
+        <!-- /row -->
+        }
+    </div>
+    <!-- /container -->
+</div>
+<!-- /Blog -->
+
+
+
+
+            @Html.DisplayNameFor(model => model.title)
+       
+            @Html.DisplayNameFor(model => model.body)
+       
+            @Html.DisplayNameFor(model => model.posted_at)
+        

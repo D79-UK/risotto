@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="cafedatabase4Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="assortiment">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="127" FixedLength="false" Unicode="true" />
+    <Property Name="price" Type="Double" />
+    <NavigationProperty Name="available_assortiments" Relationship="Self.fk_available_assortiments" FromRole="assortiments" ToRole="available_assortiments" />
+  </EntityType>
+  <EntityType Name="available_assortiments">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_assortiment" Type="Int32" />
+    <Property Name="id_cafe" Type="Int32" />
+    <Property Name="quantity" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="assortiment" Relationship="Self.fk_available_assortiments" FromRole="available_assortiments" ToRole="assortiments" />
+    <NavigationProperty Name="cafe" Relationship="Self.fk_cafe" FromRole="available_assortiments" ToRole="cafes" />
+  </EntityType>
+  <EntityType Name="cafe">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="61" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="address" Type="String" MaxLength="61" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="lat" Type="Double" />
+    <Property Name="lon" Type="Double" />
+    <NavigationProperty Name="available_assortiments" Relationship="Self.fk_cafe" FromRole="cafes" ToRole="available_assortiments" />
+  </EntityType>
+  <EntityType Name="comment">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_post" Type="Int32" />
+    <Property Name="title" Type="String" MaxLength="61" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="body" Type="String" MaxLength="1023" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="commented_at" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="post" Relationship="Self.fk_posts" FromRole="comments" ToRole="posts" />
+  </EntityType>
+  <EntityType Name="event">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="61" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="scheduled_on" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="post">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="61" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="body" Type="String" MaxLength="1023" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="posted_at" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="comments" Relationship="Self.fk_posts" FromRole="posts" ToRole="comments" />
+  </EntityType>
+  <EntityType Name="reservation">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="61" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="phone" Type="String" MaxLength="61" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="61" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="id_cafe" Type="Int32" Nullable="false" />
+    <Property Name="guests_number" Type="Int32" Nullable="false" />
+    <Property Name="reserved_date" Type="DateTime" Precision="3" />
+    <Property Name="reserved_time" Type="DateTime" Precision="3" />
+  </EntityType>
+  <Association Name="fk_available_assortiments">
+    <End Role="assortiments" Type="Self.assortiment" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="available_assortiments" Type="Self.available_assortiments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="assortiments">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="available_assortiments">
+        <PropertyRef Name="id_assortiment" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_cafe">
+    <End Role="cafes" Type="Self.cafe" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="available_assortiments" Type="Self.available_assortiments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cafes">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="available_assortiments">
+        <PropertyRef Name="id_cafe" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_posts">
+    <End Role="posts" Type="Self.post" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="comments" Type="Self.comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="posts">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="comments">
+        <PropertyRef Name="id_post" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="cafedatabase4Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="assortiments" EntityType="Self.assortiment" />
+    <EntitySet Name="available_assortiments" EntityType="Self.available_assortiments" />
+    <EntitySet Name="cafes" EntityType="Self.cafe" />
+    <EntitySet Name="comments" EntityType="Self.comment" />
+    <EntitySet Name="events" EntityType="Self.event" />
+    <EntitySet Name="posts" EntityType="Self.post" />
+    <EntitySet Name="reservations" EntityType="Self.reservation" />
+    <AssociationSet Name="fk_available_assortiments" Association="Self.fk_available_assortiments">
+      <End Role="assortiments" EntitySet="assortiments" />
+      <End Role="available_assortiments" EntitySet="available_assortiments" />
+    </AssociationSet>
+    <AssociationSet Name="fk_cafe" Association="Self.fk_cafe">
+      <End Role="cafes" EntitySet="cafes" />
+      <End Role="available_assortiments" EntitySet="available_assortiments" />
+    </AssociationSet>
+    <AssociationSet Name="fk_posts" Association="Self.fk_posts">
+      <End Role="posts" EntitySet="posts" />
+      <End Role="comments" EntitySet="comments" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

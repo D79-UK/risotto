@@ -1,0 +1,73 @@
+﻿@model IEnumerable<cafedatabase.asp.net.Models.cevents>
+
+@{
+    ViewBag.Title = "Index";
+}
+            <div class="banner-area">
+                <!-- Backgound Image -->
+                <div class="bg-image bg-parallax overlay" style="background-image:url(@Url.Content("~/Content/Images/background01.jpg"))"></div>
+                <!-- /Backgound Image -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <h2 class="white-text title">Blog Post</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Events -->
+            <div id="events" class="section">
+                <!-- container -->
+                <div class="container">
+                    
+                    <!-- row -->
+                    <div class="row">
+                        <!-- section header -->
+                        <div class="section-header text-center">
+                            <h4 class="sub-title">Special Event</h4>
+                            <h2 class="title">Upcoming Event</h2>
+                            <p>
+                                @Html.ActionLink("Create New", "Create")
+                            </p>
+                        </div>
+                        <!-- /section header -->
+
+
+                        @foreach (var item in Model)
+                        {
+                            <!-- single event -->
+                            <div class="col-md-6">
+                                <div class="event">
+                                    <div class="event-img">
+                                        <img src="@Url.Content("~/Content/Images/event01.jpg")" />
+                                        <div class="event-day">
+                                            <span>@Html.DisplayFor(modelItem => item.scheduled_on)</span>
+                                        </div>
+                                    </div>
+                                    <div class="event-content">
+                                        <p><i class="fa fa-clock-o"></i>@Html.DisplayFor(modelItem => item.scheduled_on)</p>
+                                        <h3>
+                                            @Html.DisplayFor(modelItem => item.title) 
+                                        </h3>
+                                        <h4>@Html.ActionLink("- Details", "Details", new { id = item.id })</h4>
+                                        <p>@Html.DisplayFor(modelItem => item.description)</p>
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                                         
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /single event -->
+                        }
+
+
+
+                    </div>
+                    <!-- /row -->
+                </div>
+                <!-- /container -->
+            </div>
+            <!-- /Events -->

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a568bd3e7fa649d5b64b55f330d1cf34" Name="Diagram1">
+        <EntityTypeShape EntityType="cafedatabaseModel.assortiments" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="cafedatabaseModel.available_assortiments" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="cafedatabaseModel.cafes" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="cafedatabaseModel.cevents" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="cafedatabaseModel.comments" Width="1.5" PointX="5" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="cafedatabaseModel.posts" Width="1.5" PointX="2.75" PointY="5" IsExpanded="true" />
+        <AssociationConnector Association="cafedatabaseModel.fk_available_assortiments" ManuallyRouted="false" />
+        <AssociationConnector Association="cafedatabaseModel.fk_cafe" ManuallyRouted="false" />
+        <AssociationConnector Association="cafedatabaseModel.fk_posts" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
